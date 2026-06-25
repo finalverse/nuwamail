@@ -21,7 +21,7 @@ pub fn build_http_client(
     allow_invalid_certs: bool,
 ) -> Result<Client, String> {
     let mut headers = build_http_headers(raw_headers, username, password, token, content_type)?;
-    headers.insert(USER_AGENT, "Stalwart/1.0.0".parse().unwrap());
+    headers.insert(USER_AGENT, "NuwaMail/1.0.0".parse().unwrap());
 
     match Client::builder()
         .connect_timeout(timeout)

@@ -1,0 +1,37 @@
+# NuwaMail Server — example deployment compose file.
+#
+# This is a DEPLOYMENT EXAMPLE for the NuwaMail baseline. It is not used by the
+# build or the test suite. Build the image first (the repo has no published
+# image yet):
+#
+#   docker build -t ghcr.io/finalverse/nuwamail:latest .
+#   docker compose -f docker-compose.example.yml up -d
+#
+# Config and data paths inside the container remain /etc/stalwart and
+# /var/lib/stalwart for compatibility with the upstream baseline. Replace the
+# example hostname with your own domain.
+
+services:
+  nuwamail:
+    image: ghcr.io/finalverse/nuwamail:latest
+    container_name: nuwamail
+    hostname: mail.nuwamail.com   # example — replace with your MX hostname
+    restart: unless-stopped
+    ports:
+      - "25:25"      # SMTP
+      - "587:587"    # Submission (STARTTLS)
+      - "465:465"    # Submission (implicit TLS)
+      - "143:143"    # IMAP
+      - "993:993"    # IMAPS
+      - "110:110"    # POP3
+      - "995:995"    # POP3S
+      - "4190:4190"  # ManageSieve
+      - "443:443"    # HTTPS / JMAP / NuwaMail Admin
+      - "8080:8080"  # HTTP (health / ACME HTTP-01)
+    volumes:
+      - nuwamail-config:/etc/stalwart
+      - nuwamail-data:/var/lib/stalwart
+
+volumes:
+  nuwamail-config:
+  nuwamail-data:

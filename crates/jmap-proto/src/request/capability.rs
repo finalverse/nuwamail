@@ -392,7 +392,7 @@ impl Session {
 impl Default for SieveSessionCapabilities {
     fn default() -> Self {
         Self {
-            implementation: "Stalwart v1.0.0",
+            implementation: "NuwaMail v1.0.0",
         }
     }
 }

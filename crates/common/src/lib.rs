@@ -86,8 +86,12 @@ pub use psl;
 pub static VERSION_PRIVATE: &str = env!("CARGO_PKG_VERSION");
 pub static VERSION_PUBLIC: &str = "1.0.0";
 
-pub static USER_AGENT: &str = "Stalwart/1.0.0";
-pub static DAEMON_NAME: &str = concat!("Stalwart v", env!("CARGO_PKG_VERSION"),);
+pub static USER_AGENT: &str = "NuwaMail/1.0.0";
+pub static DAEMON_NAME: &str = concat!("NuwaMail v", env!("CARGO_PKG_VERSION"),);
+// NuwaMail: PROD_ID is intentionally preserved. It is embedded in generated
+// iCalendar/vCard objects and asserted by test fixtures (tests/resources/itip/*),
+// and acts as a stable product identifier. Do not rebrand without updating
+// fixtures and verifying interop.
 pub static PROD_ID: &str = "-//Stalwart Labs LLC//Stalwart Server//EN";
 
 /*

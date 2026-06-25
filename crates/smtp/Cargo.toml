@@ -1,6 +1,6 @@
 [package]
 name = "smtp"
-description = "Stalwart SMTP Server"
+description = "NuwaMail SMTP Server (derived from Stalwart)"
 authors = [ "Stalwart Labs LLC <hello@stalw.art>"]
 repository = "https://github.com/stalwartlabs/smtp-server"
 homepage = "https://stalw.art/smtp"

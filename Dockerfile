@@ -25,6 +25,12 @@ RUN RUSTFLAGS="$(cat /flags.txt)" cargo build --target "$(cat /target.txt)" --re
 RUN mv "/build/target/$(cat /target.txt)/release" "/output"
 
 FROM docker.io/debian:trixie-slim
+# NuwaMail Server — derived from Stalwart Mail Server (see FORK_NOTICE.md).
+LABEL org.opencontainers.image.title="NuwaMail Server" \
+      org.opencontainers.image.description="NuwaMail Mail & Collaboration Server (derived from Stalwart Mail Server)" \
+      org.opencontainers.image.vendor="Finalverse / NuwaMail" \
+      org.opencontainers.image.source="https://github.com/finalverse/nuwamail" \
+      org.opencontainers.image.licenses="AGPL-3.0-only"
 RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get update && \
     apt-get install -yq --no-install-recommends ca-certificates curl libcap2-bin && \
@@ -34,6 +40,9 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     mkdir -p /etc/stalwart /var/lib/stalwart && \
     chown stalwart:stalwart /etc/stalwart /var/lib/stalwart
 COPY --from=builder --chmod=0755 /output/stalwart /usr/local/bin/stalwart
+# NuwaMail-branded command alias; the binary itself is unchanged for upstream
+# mergeability and config-path compatibility.
+RUN ln -s /usr/local/bin/stalwart /usr/local/bin/nuwamail-server
 RUN setcap 'cap_net_bind_service=+ep' /usr/local/bin/stalwart
 USER stalwart
 WORKDIR /var/lib/stalwart
