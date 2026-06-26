@@ -27815,7 +27815,7 @@ impl MtaStageConnect {
         ExpressionContext {
             expr: &self.smtp_greeting,
             default: Some(Expression {
-                else_: "system('hostname') + ' Stalwart ESMTP at your service'".to_string(),
+                else_: "system('hostname') + ' NuwaMail ESMTP at your service'".to_string(),
                 ..Default::default()
             }),
             property: Property::SmtpGreeting,
@@ -27879,7 +27879,7 @@ impl Default for MtaStageConnect {
     fn default() -> Self {
         Self {
             smtp_greeting: Expression {
-                else_: "system('hostname') + ' Stalwart ESMTP at your service'".to_string(),
+                else_: "system('hostname') + ' NuwaMail ESMTP at your service'".to_string(),
                 ..Default::default()
             },
             hostname: Expression {
